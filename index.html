@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills — MSCREATIVE.SYSTEMS</title>
+<meta name="description" content="Hub de skills para Claude Cowork. Módulos prontos para instalar e usar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;1,300&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ds-font-display: 'IBM Plex Sans', sans-serif;
+  --ds-font-body: 'IBM Plex Sans', sans-serif;
+  --ds-font-label: 'Space Mono', monospace;
+  --ds-font-accent: 'Libre Caslon Text', Georgia, serif;
+  --ds-bg-primary: #0A0C10;
+  --ds-bg-secondary: #12141A;
+  --ds-bg-surface: #1A1D26;
+  --ds-bg-surface-hover: #22262F;
+  --ds-text-primary: #B2A898;
+  --ds-text-body: #B2A898;
+  --ds-text-secondary: rgba(178, 168, 152, 0.65);
+  --ds-text-muted: rgba(178, 168, 152, 0.38);
+  --ds-ms-accent-1: #A89D80;
+  --ds-ms-accent-2: #756750;
+  --ds-border-subtle: rgba(255, 255, 255, 0.06);
+  --ds-grid-color: rgba(255, 255, 255, 0.025);
+  --ds-grid-size: 54px;
+  --ds-radius-sm: 2px;
+  --ds-radius-md: 4px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--ds-bg-primary);
+  color: var(--ds-text-body);
+  font-family: var(--ds-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  background-image:
+    linear-gradient(var(--ds-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ds-grid-color) 1px, transparent 1px);
+  background-size: var(--ds-grid-size) var(--ds-grid-size);
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.label { font-family: var(--ds-font-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ds-text-muted); }
+header { padding: 40px 0; border-bottom: 1px solid var(--ds-border-subtle); }
+.header-inner { display: flex; justify-content: space-between; align-items: center; }
+.page-hero { padding: 80px 0 72px; border-bottom: 1px solid var(--ds-border-subtle); }
+.page-title { font-family: var(--ds-font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 300; color: var(--ds-text-primary); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 16px; }
+.page-subtitle { font-size: 17px; font-weight: 300; color: var(--ds-text-secondary); max-width: 480px; line-height: 1.65; }
+.skills-section { padding: 72px 0; }
+.skills-header { margin-bottom: 40px; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2px; }
+.skill-card { background: var(--ds-bg-surface); border-radius: var(--ds-radius-sm); padding: 36px; text-decoration: none; display: block; transition: background 0.2s ease; }
+.skill-card:hover { background: var(--ds-bg-surface-hover); }
+.skill-card-tag { margin-bottom: 20px; }
+.skill-card-title { font-family: var(--ds-font-display); font-size: 22px; font-weight: 300; color: var(--ds-text-primary); line-height: 1.2; margin-bottom: 12px; }
+.skill-card-desc { font-size: 15px; font-weight: 300; color: var(--ds-text-secondary); line-height: 1.6; margin-bottom: 28px; }
+.skill-card-arrow { color: var(--ds-ms-accent-1); font-family: var(--ds-font-label); font-size: 11px; letter-spacing: 0.15em; }
+footer { padding: 28px 0; border-top: 1px solid var(--ds-border-subtle); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; }
+@media (max-width: 600px) {
+  .skills-grid { grid-template-columns: 1fr; }
+  .header-inner, .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <span class="label">MSCREATIVE.SYSTEMS</span>
+      <span class="label">SKILLS HUB</span>
+    </div>
+  </div>
+</header>
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Skills para<br>Claude Cowork.</h1>
+    <p class="page-subtitle">Módulos prontos para instalar. Cada skill resolve um problema específico — sem configuração manual, sem prompts para decorar.</p>
+  </div>
+</div>
+<section class="skills-section">
+  <div class="container">
+    <div class="skills-header"><span class="label">SKILLS DISPONÍVEIS</span></div>
+    <div class="skills-grid">
+      <a href="skills/teams-setup-playbook/index.html" class="skill-card">
+        <div class="skill-card-tag"><span class="label">TEAMS · V1 · GRATUITO</span></div>
+        <h2 class="skill-card-title">Teams Setup Playbook</h2>
+        <p class="skill-card-desc">Implanta o Claude Teams no seu time em 7 dias. Resolve setup, prompts, templates e comunicação interna.</p>
+        <span class="skill-card-arrow">VER SKILL →</span>
+      </a>
+      <!-- NOVOS CARDS: copiar bloco acima, ajustar href/tag/title/desc -->
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="label">MSCREATIVE.SYSTEMS</span>
+      <span class="label">SKILLS HUB</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

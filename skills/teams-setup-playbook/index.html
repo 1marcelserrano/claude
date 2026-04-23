@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teams Setup Playbook — MSCREATIVE.SYSTEMS</title>
+<meta name="description" content="Skill para implantar o Claude no seu time em 7 dias. Arquitetura, system prompts, templates e kit de comunicação prontos para usar.">
+<meta property="og:title" content="Teams Setup Playbook — MSCREATIVE.SYSTEMS">
+<meta property="og:description" content="Skill para implantar o Claude no seu time em 7 dias. Entregáveis prontos, sem improviso.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;1,300&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ds-font-display: 'IBM Plex Sans', sans-serif;
+  --ds-font-body: 'IBM Plex Sans', sans-serif;
+  --ds-font-label: 'Space Mono', monospace;
+  --ds-font-accent: 'Libre Caslon Text', Georgia, serif;
+  --ds-bg-primary: #0A0C10;
+  --ds-bg-secondary: #12141A;
+  --ds-bg-surface: #1A1D26;
+  --ds-bg-surface-hover: #22262F;
+  --ds-text-primary: #B2A898;
+  --ds-text-body: #B2A898;
+  --ds-text-secondary: rgba(178, 168, 152, 0.65);
+  --ds-text-muted: rgba(178, 168, 152, 0.38);
+  --ds-ms-accent-1: #A89D80;
+  --ds-ms-accent-2: #756750;
+  --ds-ms-bg-gradient: linear-gradient(145deg, #0C0B08 0%, #16140F 100%);
+  --ds-border-subtle: rgba(255, 255, 255, 0.06);
+  --ds-grid-color: rgba(255, 255, 255, 0.025);
+  --ds-grid-size: 54px;
+  --ds-radius-sm: 2px;
+  --ds-radius-md: 4px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--ds-bg-primary);
+  color: var(--ds-text-body);
+  font-family: var(--ds-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  background-image:
+    linear-gradient(var(--ds-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ds-grid-color) 1px, transparent 1px);
+  background-size: var(--ds-grid-size) var(--ds-grid-size);
+  background-position: center top;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.label { font-family: var(--ds-font-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ds-text-muted); }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+#hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 0 100px; border-bottom: 1px solid var(--ds-border-subtle); }
+.hero-brand { margin-bottom: 64px; }
+.hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--ds-ms-accent-1); flex-shrink: 0; }
+.hero-title { font-family: var(--ds-font-display); font-size: clamp(40px, 6vw, 80px); font-weight: 300; line-height: 1.1; color: var(--ds-text-primary); max-width: 820px; margin-bottom: 32px; letter-spacing: -0.01em; }
+.hero-subtitle { font-family: var(--ds-font-body); font-size: 18px; color: var(--ds-text-body); max-width: 640px; line-height: 1.65; margin-bottom: 48px; font-weight: 300; }
+.hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--ds-ms-accent-1); color: #0A0C10; font-family: var(--ds-font-label); font-size: 12px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 28px; border-radius: var(--ds-radius-md); text-decoration: none; transition: background 0.2s ease, transform 0.15s ease; border: none; cursor: pointer; }
+.btn-primary:hover { background: var(--ds-ms-accent-2); transform: translateY(-1px); }
+.hero-meta { margin-top: 4px; }
+section { padding: 100px 0; border-bottom: 1px solid var(--ds-border-subtle); }
+.section-header { margin-bottom: 56px; }
+.section-number { font-family: var(--ds-font-label); font-size: 11px; letter-spacing: 0.2em; color: var(--ds-ms-accent-1); margin-bottom: 16px; display: block; }
+.section-title { font-family: var(--ds-font-display); font-size: clamp(28px, 3.5vw, 44px); font-weight: 300; color: var(--ds-text-primary); line-height: 1.15; letter-spacing: -0.01em; }
+#o-que-e { background-color: var(--ds-bg-secondary); }
+.skill-explanation { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.skill-body { font-size: 17px; font-weight: 300; line-height: 1.75; color: var(--ds-text-body); }
+.skill-body p + p { margin-top: 20px; }
+.skill-analogy { background: var(--ds-bg-surface); border: 1px solid var(--ds-border-subtle); border-radius: var(--ds-radius-md); padding: 32px; }
+.skill-analogy-label { margin-bottom: 16px; }
+.skill-analogy-text { font-family: var(--ds-font-accent); font-style: italic; font-size: clamp(20px, 2.5vw, 26px); color: var(--ds-text-primary); line-height: 1.4; }
+.skill-analogy-body { margin-top: 16px; font-size: 15px; font-weight: 300; color: var(--ds-text-secondary); line-height: 1.65; }
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border: 1px solid var(--ds-border-subtle); border-radius: var(--ds-radius-md); overflow: hidden; }
+.comparison-card { background: var(--ds-bg-surface); padding: 40px; }
+.comparison-card:first-child { border-right: 1px solid var(--ds-border-subtle); }
+.comparison-card-label { margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+.comparison-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.comparison-dot.bad { background: rgba(178, 168, 152, 0.25); }
+.comparison-dot.good { background: var(--ds-ms-accent-1); }
+.comparison-card-title { font-family: var(--ds-font-display); font-size: 22px; font-weight: 300; color: var(--ds-text-primary); margin-bottom: 20px; }
+.comparison-items { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.comparison-items li { font-size: 15px; font-weight: 300; color: var(--ds-text-body); padding-left: 20px; position: relative; line-height: 1.5; }
+.comparison-items li::before { content: '—'; position: absolute; left: 0; color: var(--ds-text-muted); font-size: 12px; }
+.comparison-card.good-card .comparison-items li::before { color: var(--ds-ms-accent-1); }
+#entregaveis { background-color: var(--ds-bg-secondary); }
+.deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.deliverable-item { background: var(--ds-bg-surface); padding: 36px; border-radius: var(--ds-radius-sm); transition: background 0.2s ease; }
+.deliverable-item:hover { background: var(--ds-bg-surface-hover); }
+.deliverable-number { font-family: var(--ds-font-label); font-size: 11px; letter-spacing: 0.2em; color: var(--ds-ms-accent-1); margin-bottom: 16px; display: block; }
+.deliverable-title { font-family: var(--ds-font-display); font-size: 20px; font-weight: 300; color: var(--ds-text-primary); margin-bottom: 10px; line-height: 1.25; }
+.deliverable-desc { font-size: 15px; font-weight: 300; color: var(--ds-text-secondary); line-height: 1.6; }
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 48px; }
+.step-item { background: var(--ds-bg-surface); padding: 40px 32px; border-radius: var(--ds-radius-sm); }
+.step-number { font-family: var(--ds-font-display); font-size: 64px; font-weight: 300; color: var(--ds-border-subtle); line-height: 1; margin-bottom: 24px; display: block; user-select: none; }
+.step-title { font-family: var(--ds-font-display); font-size: 18px; font-weight: 300; color: var(--ds-text-primary); margin-bottom: 10px; }
+.step-desc { font-size: 15px; font-weight: 300; color: var(--ds-text-secondary); line-height: 1.6; }
+.step-desc code { font-family: var(--ds-font-label); font-size: 13px; background: var(--ds-bg-primary); padding: 2px 6px; border-radius: var(--ds-radius-sm); color: var(--ds-ms-accent-1); }
+.install-note { background: var(--ds-bg-surface); border-left: 2px solid var(--ds-border-subtle); padding: 16px 20px; border-radius: 0 var(--ds-radius-md) var(--ds-radius-md) 0; }
+.install-note p { font-size: 13px; color: var(--ds-text-secondary); }
+#cta-final { border-bottom: none; text-align: center; padding: 120px 0 100px; background: var(--ds-ms-bg-gradient); position: relative; overflow: hidden; }
+#cta-final::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--ds-grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--ds-grid-color) 1px, transparent 1px); background-size: var(--ds-grid-size) var(--ds-grid-size); pointer-events: none; }
+.cta-inner { position: relative; z-index: 1; }
+.cta-title { font-family: var(--ds-font-accent); font-style: italic; font-size: clamp(28px, 4vw, 52px); font-weight: 400; color: var(--ds-text-primary); max-width: 640px; margin: 0 auto 40px; line-height: 1.2; letter-spacing: -0.01em; }
+.cta-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+footer { padding: 28px 0; border-top: 1px solid var(--ds-border-subtle); background: var(--ds-bg-primary); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; }
+@media (max-width: 768px) {
+  section { padding: 72px 0; }
+  .skill-explanation { grid-template-columns: 1fr; gap: 40px; }
+  .comparison-grid { grid-template-columns: 1fr; }
+  .comparison-card:first-child { border-right: none; border-bottom: 1px solid var(--ds-border-subtle); }
+  .deliverables-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  .hero-title { font-size: clamp(34px, 10vw, 64px); }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  #hero { padding: 60px 0 80px; }
+}
+</style>
+</head>
+<body>
+
+<section id="hero">
+  <div class="container">
+    <div class="hero-brand fade-in"><span class="label">MSCREATIVE.SYSTEMS</span></div>
+    <div class="hero-eyebrow fade-in"><span class="label">TEAMS SETUP PLAYBOOK</span></div>
+    <h1 class="hero-title fade-in">Time alinhado não improvisa,<br>tem infraestrutura e método.</h1>
+    <p class="hero-subtitle fade-in">Chega de achismos com IA. Baixe um arquivo projetado para te ajudar a configurar seu Claude Teams de forma personalizada para suas demandas específicas. Ele resolve setup, prompts, templates e comunicação interna. Instalado em dois cliques, tudo funcionando em 7 dias.</p>
+    <div class="hero-actions fade-in">
+      <a href="teams-setup-playbook.skill" download class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2v8M5 7l3 3 3-3M3 13h10" stroke="#0A0C10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Baixar a Skill
+      </a>
+      <span class="label hero-meta">TEAMS SETUP PLAYBOOK · V1 · GRATUITO</span>
+    </div>
+  </div>
+</section>
+
+<section id="o-que-e">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-number">01 — O QUE É UMA SKILL</span>
+      <h2 class="section-title">Não é um chatbot.<br>É um especialista configurado<br>para o seu contexto.</h2>
+    </div>
+    <div class="skill-explanation">
+      <div class="skill-body fade-in">
+        <p>Uma skill é um módulo que você instala no Cowork — o app desktop da Anthropic para automação de tarefas. Quando ativada, ela muda como o Claude se comporta: em vez de você precisar explicar o contexto toda vez, a skill já sabe o que perguntar, como estruturar a resposta e quais entregáveis gerar.</p>
+        <p>Sem skill, você abre o Claude, olha para a tela em branco e pensa: "o que eu digito?". Com a skill instalada, você digita uma frase — e o Claude faz as perguntas certas, conduz o processo e entrega material pronto.</p>
+        <p>É a diferença entre ter um estagiário que espera instrução e ter um consultor que já conhece o seu problema.</p>
+      </div>
+      <div class="skill-analogy fade-in">
+        <div class="label skill-analogy-label">ANALOGIA DIRETA</div>
+        <p class="skill-analogy-text">"É como instalar um plugin no seu editor de código — só que o plugin ensina o Claude a trabalhar do jeito certo para a sua realidade."</p>
+        <p class="skill-analogy-body">Você instala uma vez. O protocolo funciona sempre que você precisar. Sem configuração manual, sem prompts longos para decorar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="por-que">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-number">02 — POR QUE ISSO IMPORTA</span>
+      <h2 class="section-title">Sem padrão,<br>cada pessoa usa do seu jeito.</h2>
+    </div>
+    <div class="comparison-grid fade-in">
+      <div class="comparison-card">
+        <div class="comparison-card-label"><span class="comparison-dot bad"></span><span class="label">SEM SKILL</span></div>
+        <h3 class="comparison-card-title">Cada um faz do seu jeito</h3>
+        <ul class="comparison-items">
+          <li>Ninguém sabe exatamente como pedir o que precisa</li>
+          <li>Os resultados variam muito de pessoa para pessoa</li>
+          <li>Reuniões para explicar "como usar o Claude"</li>
+          <li>Tempo perdido tentando lembrar qual prompt funcionou</li>
+          <li>Adoção irregular — alguns usam todo dia, outros nunca</li>
+        </ul>
+      </div>
+      <div class="comparison-card good-card">
+        <div class="comparison-card-label"><span class="comparison-dot good"></span><span class="label">COM SKILL</span></div>
+        <h3 class="comparison-card-title">Sistema. Padrão. Entregável.</h3>
+        <ul class="comparison-items">
+          <li>Infraestrutura montada em 7 dias com guia passo a passo</li>
+          <li>System prompts prontos para cada Project do time</li>
+          <li>Templates que qualquer pessoa do time consegue usar</li>
+          <li>Kit de comunicação para o rollout — mensagens prontas</li>
+          <li>Onboarding documentado, replicável e sem fricção</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="entregaveis">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-number">03 — O QUE ESTA SKILL ENTREGA</span>
+      <h2 class="section-title">Cinco entregáveis.<br>Todos customizados para o seu time.</h2>
+    </div>
+    <div class="deliverables-grid">
+      <div class="deliverable-item fade-in">
+        <span class="deliverable-number">01</span>
+        <h3 class="deliverable-title">Arquitetura de Projects</h3>
+        <p class="deliverable-desc">Estrutura de pastas e nomes para organizar o Claude Teams. Quais Projects criar, como nomear, quem tem acesso a quê.</p>
+      </div>
+      <div class="deliverable-item fade-in">
+        <span class="deliverable-number">02</span>
+        <h3 class="deliverable-title">System Prompts</h3>
+        <p class="deliverable-desc">Instruções globais prontas para colar em cada Project. Define o tom, o contexto e o comportamento do Claude para cada área do time.</p>
+      </div>
+      <div class="deliverable-item fade-in">
+        <span class="deliverable-number">03</span>
+        <h3 class="deliverable-title">Prompt Templates</h3>
+        <p class="deliverable-desc">Frases curtas e diretas que qualquer pessoa do time usa para gerar os entregáveis mais comuns — sem precisar saber escrever prompts.</p>
+      </div>
+      <div class="deliverable-item fade-in">
+        <span class="deliverable-number">04</span>
+        <h3 class="deliverable-title">Kit de Comunicação</h3>
+        <p class="deliverable-desc">Mensagens prontas para Slack, DM e email de rollout. Apresenta o sistema para o time sem causar resistência nem confusão.</p>
+      </div>
+      <div class="deliverable-item fade-in" style="grid-column: 1 / -1;">
+        <span class="deliverable-number">05</span>
+        <h3 class="deliverable-title">Guia de Onboarding</h3>
+        <p class="deliverable-desc">Documento completo e pronto para enviar ao time na sexta-feira. Cobre o quê, por quê e como — do zero ao primeiro uso em menos de 10 minutos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-instalar">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-number">04 — COMO INSTALAR E USAR</span>
+      <h2 class="section-title">Três passos.<br>O Claude faz o resto.</h2>
+    </div>
+    <div class="steps-grid fade-in">
+      <div class="step-item">
+        <span class="step-number">01</span>
+        <h3 class="step-title">Baixe o arquivo</h3>
+        <p class="step-desc">Clique em "Baixar a Skill" e salve o arquivo <code>.skill</code> em qualquer pasta do seu computador.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-number">02</span>
+        <h3 class="step-title">Instale no Cowork</h3>
+        <p class="step-desc">Clique duas vezes no arquivo ou arraste para dentro do Cowork. A skill aparece instalada em segundos.</p>
+      </div>
+      <div class="step-item">
+        <span class="step-number">03</span>
+        <h3 class="step-title">Acione e deixe trabalhar</h3>
+        <p class="step-desc">Digite <code>quero implantar o Claude no meu time</code> — a skill assume o comando, faz as perguntas certas e gera tudo.</p>
+      </div>
+    </div>
+    <div class="install-note fade-in">
+      <p>Requer Cowork instalado e plano Claude Teams (mínimo 5 seats). O Cowork está disponível em <strong style="color: var(--ds-text-primary);">claude.ai/download</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cta-final">
+  <div class="container">
+    <div class="cta-inner">
+      <p class="cta-title fade-in">Sete dias para o time trabalhar com IA de verdade.</p>
+      <div class="cta-actions fade-in">
+        <a href="teams-setup-playbook.skill" download class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2v8M5 7l3 3 3-3M3 13h10" stroke="#0A0C10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Baixar a Skill — Gratuito
+        </a>
+        <span class="label">TEAMS SETUP PLAYBOOK · V1 · COWORK + CLAUDE TEAMS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="label">MSCREATIVE.SYSTEMS</span>
+      <span class="label">TEAMS SETUP PLAYBOOK V1</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 80 + 'ms';
+    observer.observe(el);
+  });
+  const heroItems = document.querySelectorAll('#hero .fade-in');
+  let delay = 0;
+  heroItems.forEach((el) => { setTimeout(() => el.classList.add('visible'), delay); delay += 120; });
+})();
+</script>
+</body>
+</html>
