@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aboissa Teams — Hub de Onboarding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables */
+    :root {
+      --color-navy: #0a2240;
+      --color-gold: #ffb71b;
+      --color-bronze: #b68d40;
+      --color-cream: #f4ebd0;
+      --color-silver: #b0b7c0;
+      --color-dark-navy: #1f3447;
+      --color-medium-navy: #2d5273;
+      --color-white: #ffffff;
+      --color-text: #0a0c10;
+      --color-text-light: #b0b7c0;
+
+      --font-family: 'Inter', sans-serif;
+      --spacing-xs: 8px;
+      --spacing-sm: 16px;
+      --spacing-md: 24px;
+      --spacing-lg: 48px;
+      --spacing-xl: 64px;
+      --spacing-2xl: 96px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-white);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* Grid Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #faf8f4;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-dark-navy) 100%);
+      color: var(--color-white);
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 4px solid var(--color-gold);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 183, 27, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-md);
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 8vw, 64px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .hero p {
+      font-size: clamp(14px, 2vw, 18px);
+      color: var(--color-silver);
+      margin-bottom: var(--spacing-lg);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: var(--spacing-sm) var(--spacing-lg);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 4px;
+      font-family: var(--font-family);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary {
+      background-color: var(--color-gold);
+      color: var(--color-navy);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-bronze);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 183, 27, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-gold);
+      border: 2px solid var(--color-gold);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-gold);
+      color: var(--color-navy);
+    }
+
+    /* Section Base */
+    section {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+    }
+
+    .section-number {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--color-bronze);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .section-title {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--color-silver);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+
+    .project-card {
+      background: var(--color-white);
+      border: 2px solid #e8e8e8;
+      border-radius: 8px;
+      padding: var(--spacing-lg);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: var(--color-gold);
+    }
+
+    .project-card:hover {
+      border-color: var(--color-gold);
+      box-shadow: 0 12px 32px rgba(182, 141, 64, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .project-icon {
+      font-size: 32px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .project-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-navy);
+    }
+
+    .project-card p {
+      font-size: 14px;
+      color: var(--color-silver);
+      line-height: 1.6;
+    }
+
+    /* Timeline */
+    .timeline {
+      margin-top: var(--spacing-xl);
+    }
+
+    .timeline-container {
+      position: relative;
+      padding: var(--spacing-lg) 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+    }
+
+    .timeline-marker {
+      width: 48px;
+      height: 48px;
+      background-color: var(--color-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-navy);
+      font-weight: 700;
+      font-size: 18px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      width: 2px;
+      height: calc(100% + var(--spacing-xl));
+      background-color: #e8e8e8;
+    }
+
+    .timeline-content h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-navy);
+    }
+
+    .timeline-content p {
+      font-size: 14px;
+      color: var(--color-silver);
+    }
+
+    /* Compliance Grid */
+    .compliance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+
+    .compliance-card {
+      background: linear-gradient(135deg, rgba(255, 183, 27, 0.05) 0%, rgba(182, 141, 64, 0.05) 100%);
+      border-left: 4px solid var(--color-gold);
+      padding: var(--spacing-lg);
+      border-radius: 4px;
+    }
+
+    .compliance-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-bronze);
+    }
+
+    .compliance-card ul {
+      list-style: none;
+      font-size: 13px;
+      color: var(--color-silver);
+      line-height: 1.8;
+    }
+
+    .compliance-card li::before {
+      content: '✓ ';
+      color: var(--color-gold);
+      font-weight: 700;
+      margin-right: var(--spacing-xs);
+    }
+
+    /* Playbook Section */
+    .playbook-section {
+      background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-dark-navy) 100%);
+      color: var(--color-white);
+      border-radius: 8px;
+      padding: var(--spacing-xl);
+      text-align: center;
+      margin-top: var(--spacing-xl);
+    }
+
+    .playbook-section h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .playbook-section p {
+      font-size: 14px;
+      color: var(--color-silver);
+      margin-bottom: var(--spacing-lg);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* FAQ Section */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid #e8e8e8;
+      padding-bottom: var(--spacing-lg);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-navy);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      color: var(--color-gold);
+    }
+
+    .faq-toggle {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      display: none;
+      font-size: 14px;
+      color: var(--color-silver);
+      margin-top: var(--spacing-md);
+      line-height: 1.8;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-medium-navy) 100%);
+      color: var(--color-white);
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      text-align: center;
+      border-top: 4px solid var(--color-gold);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--color-dark-navy);
+      color: var(--color-silver);
+      text-align: center;
+      padding: var(--spacing-lg);
+      font-size: 12px;
+    }
+
+    footer a {
+      color: var(--color-gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--color-bronze);
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease 0.2s forwards;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      section {
+        padding: var(--spacing-xl) var(--spacing-md);
+      }
+
+      .hero {
+        padding: var(--spacing-xl) var(--spacing-md);
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .timeline-item {
+        grid-template-columns: auto 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .compliance-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+        --spacing-2xl: 48px;
+      }
+
+      .hero {
+        padding: var(--spacing-xl) var(--spacing-sm);
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      section {
+        padding: var(--spacing-lg) var(--spacing-sm);
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Aboissa Teams</div>
+    <h1>Infraestrutura que funciona</h1>
+    <p>Implante Claude Teams em 7 dias. Time alinhado, padrão consistente, inteligência acionável em cada decisão.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" onclick="document.querySelector('.playbook-section').scrollIntoView({behavior: 'smooth'})">Começar Setup</button>
+      <button class="btn btn-secondary" onclick="document.querySelector('#faq').scrollIntoView({behavior: 'smooth'})">Dúvidas?</button>
+    </div>
+  </div>
+</section>
+
+<!-- VISION SECTION -->
+<section class="fade-in">
+  <div class="section-header">
+    <div class="section-number">01 — O QUE É</div>
+    <h2 class="section-title">Não é um chatbot.<br>É um especialista configurado<br>para sua empresa.</h2>
+    <p class="section-subtitle">Aboissa Teams é infraestrutura de IA — 5 Projects especializados que resolvem análise tática, comunicação, financeiro, documentação e design.</p>
+  </div>
+
+  <div style="margin-top: var(--spacing-xl); max-width: 800px; margin-left: auto; margin-right: auto;">
+    <p style="font-size: 15px; color: var(--color-silver); line-height: 1.8; margin-bottom: var(--spacing-lg);">
+      <strong style="color: var(--color-navy);">Sem padrão:</strong> cada pessoa usa IA do seu jeito. Respostas inconsistentes. Análises que não conversam. Tempo perdido em setup.
+    </p>
+    <p style="font-size: 15px; color: var(--color-silver); line-height: 1.8;">
+      <strong style="color: var(--color-navy);">Com Aboissa Teams:</strong> IA funciona como departamento. Cada Project conhece o contexto, segue as regras, entrega análise acionável.
+    </p>
+  </div>
+</section>
+
+<!-- PROJECTS SECTION -->
+<section class="fade-in">
+  <div class="section-header">
+    <div class="section-number">02 — 5 PROJECTS</div>
+    <h2 class="section-title">Arquitetura de inteligência</h2>
+    <p class="section-subtitle">Cada Project é especializado. Cada um conhece seu contexto e suas regras.</p>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <div class="project-icon">📊</div>
+      <h3>RADAR_ABOISSA</h3>
+      <p><strong>Inteligência tática.</strong> Análise de mercado, arbitragem, timing, spreads. Tom: direto, acionável, jargão de trading. Público: time comercial.</p>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-icon">📢</div>
+      <h3>MICHEL_COMUNICACAO</h3>
+      <p><strong>Interface estratégica.</strong> Traduz complexidade em clareza. Comunica com C-level, parceiros, LinkedIn. Tom: autoritativo, sóbrio, sem dados sensíveis.</p>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-icon">💰</div>
+      <h3>ANALISE_FINANCEIRA</h3>
+      <p><strong>Cenários e projeções.</strong> Modela stress tests, impacto de BUs, sensibilidade de parâmetros. Suporte à decisão financeira.</p>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-icon">📖</div>
+      <h3>DOCUMENTACAO_TECNICA</h3>
+      <p><strong>Specs e runbooks.</strong> Documenta processos, SLAs, arquitetura. Referência central para operações e integração.</p>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-icon">🎨</div>
+      <h3>DESIGN_SYSTEM_ABOISSA</h3>
+      <p><strong>Componentes e tokens.</strong> ABOISSA-OS V3 — paleta, tipografia, grid, guidelines. Consistência visual em todos os outputs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE SECTION -->
+<section class="fade-in">
+  <div class="section-header">
+    <div class="section-number">03 — SETUP EM 7 DIAS</div>
+    <h2 class="section-title">Implantação rápida<br>sem improviso</h2>
+    <p class="section-subtitle">Cada fase tem entregáveis claros. No dia 7, você tem infraestrutura de IA funcionando.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-container">
+      <div class="timeline-item fade-in">
+        <div class="timeline-marker">1</div>
+        <div class="timeline-content">
+          <h4>Dias 1-2: Criar Projects & Architecture</h4>
+          <p>Setup dos 5 Projects em Claude Teams. Definir personas, tom, regras de cada um. Criar system prompts iniciais.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-marker">2</div>
+        <div class="timeline-content">
+          <h4>Dias 3-4: Adicionar Conteúdo & Context</h4>
+          <p>Carregar documentação, base técnica, catálogo de BUs, compliance rules. Treinar cada Project com contexto Aboissa.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-marker">3</div>
+        <div class="timeline-content">
+          <h4>Dias 5-6: Testar & Ajustar</h4>
+          <p>Time testa cada Project. Gera análises, comunica. Identifica gaps. Ajusta prompts e contexto conforme necessário.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-marker">4</div>
+        <div class="timeline-content">
+          <h4>Dia 7: Rollout & Capacitação</h4>
+          <p>Documentar como usar. Treinar time. Criar templates prontos. Aboissa Teams pronto para produção.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE SECTION -->
+<section class="fade-in">
+  <div class="section-header">
+    <div class="section-number">04 — COMPLIANCE INTEGRADO</div>
+    <h2 class="section-title">Regras que funcionam</h2>
+    <p class="section-subtitle">Proteção de dados + padrão consistente. Cada Project segue as mesmas regras.</p>
+  </div>
+
+  <div class="compliance-grid">
+    <div class="compliance-card fade-in">
+      <h4>Filtro Aboissa</h4>
+      <ul>
+        <li>Altera preço/spread?</li>
+        <li>Afeta crush margin?</li>
+        <li>Cria gargalo logístico?</li>
+        <li>Se NÃO: descarte</li>
+      </ul>
+    </div>
+
+    <div class="compliance-card fade-in">
+      <h4>Cobertura de BUs</h4>
+      <ul>
+        <li>Soft Oils, Palm, Oleochemical</li>
+        <li>Animal Profat, Feed, Process</li>
+        <li>Retail, Energia & Bio</li>
+        <li>Nenhuma BU ignorada</li>
+      </ul>
+    </div>
+
+    <div class="compliance-card fade-in">
+      <h4>Disclaimer Obrigatório</h4>
+      <ul>
+        <li>"Análise de mercado"</li>
+        <li>"Não constitui recomendação"</li>
+        <li>Todo material externo</li>
+        <li>RSPO/RTRS quando pertinente</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYBOOK SECTION -->
+<section class="fade-in">
+  <div class="playbook-section">
+    <h3>Teams Setup Playbook</h3>
+    <p>Implante Claude Teams em 7 dias — playbook completo com arquitetura, checklists, onboarding e kit de comunicação interna.</p>
+    <div style="margin-top: var(--spacing-lg);">
+      <p style="font-size: 12px; color: var(--color-silver); margin-bottom: var(--spacing-md);">TEAMS_SETUP_PLAYBOOK · V1 · GRATUITO</p>
+      <a href="#download-playbook" class="btn btn-primary">Baixar Playbook Completo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section id="faq" class="fade-in">
+  <div class="section-header">
+    <div class="section-number">05 — PERGUNTAS COMUNS</div>
+    <h2 class="section-title">Suas dúvidas<br>respondidas</h2>
+  </div>
+
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+        <span>O que é Claude Teams exatamente?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Claude Teams é uma infraestrutura de IA colaborativa onde cada Project é um especialista configurado para um contexto específico. No caso da Aboissa, você tem 5 Projects: um para análise tática (Muriel), um para comunicação (Michel), um para financeiro, um para documentação técnica, e outro para design system. Cada um trabalha com padrão consistente e conhece as regras da empresa.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+        <span>Quanto tempo leva para implementar?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        O setup segue um protocolo de 7 dias: Dias 1-2 você cria os Projects e define as arquiteturas. Dias 3-4 você carrega contexto e documentação. Dias 5-6 você testa e ajusta. Dia 7 você treina o time e ativa em produção. É rápido porque cada fase tem entregáveis claros — sem improviso.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+        <span>Como funciona a separação entre Muriel e Michel?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Muriel é análise tática interna — dados sensíveis de spread, margem, estratégia spot. Michel é comunicação externa — traduz essa inteligência para clareza estratégica, sem expor dados sensíveis. Michel SEMPRE deriva de Muriel: você não publica nada que Muriel não descobriu primeiro. Isso protege dados e mantém consistência.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+        <span>Preciso treinar o time antes de usar?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Sim, mas o playbook inclui guia de onboarding de primeira semana. Você treina o time durante o setup — cada pessoa aprende seu Project enquanto ele está sendo criado. No Dia 7, quando ativa em produção, o time já sabe como usar. Não é treinamento separado — é integrado ao processo.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+        <span>O que acontece com a documentação técnica?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        O Project DOCUMENTACAO_TECNICA é seu repositório vivo de specs, runbooks, SLAs, arquitetura. Quando você faz mudança operacional, documenta lá. Quando alguém nova entra, consulta lá. É referência central — mantém todo mundo alinhado. Sem documentação dispersa em Slack ou email.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+        <span>E se eu já tiver um Radar fazendo análise manual?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Perfeito — você ainda precisa de Muriel. A diferença é que agora Muriel (Claude Teams) torna a análise consistente, rápida e documentada. Seu Radar manual vira referência — Muriel aprende com o histórico e gera análises 2-5x mais rápido. Ninguém é dispensado — o time fica mais potente.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL SECTION -->
+<section class="cta-section fade-in">
+  <h2>Time alinhado não improvisa</h2>
+  <p style="font-size: 16px; margin-bottom: var(--spacing-lg); color: var(--color-silver);">Sete dias para o time trabalhar com IA de verdade. Comece agora.</p>
+  <a href="#download-playbook" class="btn btn-primary">Comece Setup Agora</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom: var(--spacing-md);">
+    <strong>Aboissa Teams — Hub de Onboarding</strong><br>
+    v1.0 · Abril 2026 · Powered by <a href="#">MSCREATIVE.SYSTEMS</a>
+  </p>
+  <p>
+    <a href="#">GitHub: AboissaSystem</a> ·
+    <a href="#">Documentação Completa</a> ·
+    <a href="#">Suporte</a>
+  </p>
+</footer>
+
+<script>
+  // Fade-in animation on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -32,3 +32,4 @@ Todas as páginas seguem MSCREATIVE.SYSTEMS V3.0:
 | Skill | Descrição | Pasta |
 |-------|-----------|-------|
 | Teams Setup Playbook | Implanta o Claude Teams em 7 dias | `skills/teams-setup-playbook/` |
+| Aboissa Teams Hub | Hub de onboarding para Aboissa — 5 Projects, setup em 7 dias, compliance | `skills/aboissa-teams-hub/` |
