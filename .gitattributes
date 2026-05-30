@@ -1,0 +1,11 @@
+# Normalização de fim de linha — evita ruído de CRLF/LF entre máquinas
+* text=auto eol=lf
+
+# Tipos textuais explícitos
+*.html  text
+*.css   text
+*.js    text
+*.json  text
+*.md    text
+*.yml   text
+*.yaml  text

@@ -1,0 +1,39 @@
+name: CI
+
+# Valida o site estático em cada push/PR. Roda no GitHub Actions (não no sandbox).
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-html:
+    name: Validar HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar HTML (html5validator)
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: .
+          # Ignora avisos de boas práticas; falha apenas em erros de sintaxe.
+          log_level: error
+
+  link-check:
+    name: Checar links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checar links quebrados (lychee)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --accept 200,206,429
+            './**/*.html'
+        fail: true
