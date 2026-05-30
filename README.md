@@ -21,6 +21,7 @@ Cada skill tem sua própria pasta em `skills/` com uma landing page independente
 ```
 
 📖 **Como criar um hub do zero:** [`docs/setup-hub-guide.md`](docs/setup-hub-guide.md)
+🤝 **Como contribuir / convenções:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## Como adicionar uma nova skill
 
