@@ -1,0 +1,34 @@
+# ───────────────────────────────────────────────
+# MSCREATIVE.SYSTEMS — Hub de Skills · .gitignore
+# ───────────────────────────────────────────────
+
+# Sistema operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Vercel
+.vercel/
+
+# Node (caso um build seja adicionado no futuro)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs e temporários
+*.log
+tmp/
+*_tmp/
+.cache/

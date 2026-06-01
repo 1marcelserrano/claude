@@ -1,0 +1,17 @@
+# Normalização de fim de linha — evita ruído de CRLF/LF entre máquinas
+* text=auto eol=lf
+
+# Tipos textuais explícitos
+*.html  text
+*.css   text
+*.js    text
+*.json  text
+*.md    text
+*.yml   text
+*.yaml  text
+
+# Arquivos .skill são ZIPs — tratar como binário (sem diff/merge de texto, sem EOL)
+*.skill binary
+
+# Git LFS: não habilitado. Maior arquivo do repo é ~24K (limiar típico de LFS é >1MB).
+# Se mídia pesada for adicionada no futuro, ver SETUP_STRATEGY.md §5 para o comando.

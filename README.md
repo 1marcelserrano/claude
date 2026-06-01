@@ -3,14 +3,25 @@
 Repositório de landing pages para skills do Claude Cowork.
 Cada skill tem sua própria pasta em `skills/` com uma landing page independente.
 
+> **Site estático** publicado via Vercel a partir da branch `main` (sem build).
+> Para contexto de desenvolvimento, ver [`CLAUDE.md`](CLAUDE.md); para o roadmap de
+> organização, ver [`SETUP_STRATEGY.md`](SETUP_STRATEGY.md).
+
 ## Estrutura
 
 ```
-skills/
-└── [nome-da-skill]/
-    ├── index.html                  ← landing page da skill
-    └── [nome-da-skill].skill       ← arquivo de instalação
+.
+├── index.html                       ← hub: lista navegável de skills (porta de entrada)
+├── docs/
+│   └── setup-hub-guide.md           ← guia: como criar um hub novo (método/processo)
+└── skills/
+    └── [nome-da-skill]/
+        ├── index.html               ← landing page da skill
+        └── [nome-da-skill].skill    ← arquivo de instalação
 ```
+
+📖 **Como criar um hub do zero:** [`docs/setup-hub-guide.md`](docs/setup-hub-guide.md)
+🤝 **Como contribuir / convenções:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## Como adicionar uma nova skill
 
